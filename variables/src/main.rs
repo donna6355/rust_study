@@ -153,7 +153,24 @@ fn main() {
     }
     println!("LIFTOFF!!!");
 
+    let sample = String::from("Hello");
+    let len = calculate_length(&sample);
+    println!("The length of '{sample}' is {len}.");
 
+    let mut sample_two = String::from("Good");
+    change(&mut sample_two);
+    println!("this is changed string '{sample_two}'");
+
+    let mut you = String::from("Isaac");
+    let you_one = &you;
+    let you_two = &you;
+    println!("{you_one} is {you_two}");
+    // variables you1 and you2 will not be used after this point
+
+    let you_three = &mut you; //therefore no problem
+    println!("this is {you_three}");
+
+    let reference_to_nothing = dangle();
 }   
 
 
@@ -166,3 +183,17 @@ fn print_labeled_measurement(value: i32, unit_label: char) {
 fn five() -> i32 {//return value type
     5
 }
+
+fn calculate_length(s:&String) -> usize {
+    s.len()
+}
+
+fn change(some_string:&mut String) {
+    some_string.push_string(", bye~!");
+}
+
+fn dangle()-> &String {// dangle returns a reference to a String
+    let s = String::from("hi"); // s is a new String
+    &s // we return a reference to the String, s
+}// Here, s goes out of scope, and is dropped. Its memory goes away.
+  // Danger!
