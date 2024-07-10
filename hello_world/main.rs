@@ -4,6 +4,11 @@ struct User{
     email: String,
     sign_in_method: u64,
 }
+#[derive(Debug)] // add this for debug
+struct Rectangle{
+    width: u32,
+    height: u32,
+}
 fn main() {
     println!("Hello, world!");
 
@@ -29,6 +34,36 @@ fn main() {
 
     println!(isaac.email);
 
+    let width1 = 30;
+    let height1 = 50;
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        area(width1, height1)
+    );
+
+    //refatoring with tuple
+    let rect1 = (30,50);
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        area_tuple(rect1)
+    );
+
+    //refactoring with struct
+    let rect2 = Rectangle { 
+        width:20,
+        height:15,
+    };
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        area_struct(rect2),
+    )
+
+    println!("rect2 is {}", rect2);//error[E0277]: `Rectangle` doesn't implement `std::fmt::Display`
+
+    println!("rect2 is {rect2:?}");
+    dbg!(&rect2);
+
 }
 
 fn build_user(email:String, username:String) -> User {
@@ -38,4 +73,16 @@ fn build_user(email:String, username:String) -> User {
         email, //email: email,
         sign_in_count: 1,
     }
+}
+
+fn area(width:u32, height:u32)->u32{
+    width * height
+}
+
+fn area_tuple(dimesions:(u32,u32))->u32 {
+    dimesions.0 * dimesions.1
+}
+
+fn area_struct(rectangle:&Rectangle)->u32 {
+    rectangle.width * rectangle*height
 }
