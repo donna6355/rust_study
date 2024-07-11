@@ -9,8 +9,26 @@ struct Rectangle{
     width: u32,
     height: u32,
 }
+
+impl Rectangle {
+    fn area(&self) -> u32 { //short for self: &Self
+        self.width * self.height
+    }
+
+    fn can_hold(&self, other:&Rectangle)->bool{ //with more parameters 
+        self.width > other.width && self.height > other.height
+    }
+
+    fn square(size:u32)->self{//constructor
+        Self{
+            width:size,
+            height:size,
+        }
+    }//let square = Rectangle::square(10);
+}
 fn main() {
     println!("Hello, world!");
+    let square = Rectangle::square(10);
 
     let isaac = User {
         active : true,
@@ -63,6 +81,10 @@ fn main() {
 
     println!("rect2 is {rect2:?}");
     dbg!(&rect2);
+    println!(
+        "The METHOD area of the rectangle is {} square pixels.",
+        rect2.area(),
+    )
 
 }
 
