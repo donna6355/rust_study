@@ -31,3 +31,25 @@ fn add_fancy_hat() {}
 fn remove_fancy_hat() {}
 fn move_player(num_spaces: u8) {}
 fn reroll() {}
+
+fn if_let(){
+    let config_max = Some(3u8);
+    match config_max {
+        Some(max) => println!("The maximum is configured to be {max}"),
+        (_) => (),
+    }
+    if let Some(max) = config_max {
+        println!("The maximum is configured to be {max}");
+    }
+    
+    let mut count = 0;
+    match coin {
+        Coin::Quarter(state) => println!("State quarter from {state:?}!"),
+        _ => count += 1,
+    }
+    if let Coin::Quarter(state) => coin {
+        println!("State quarter from {state:?}!");
+    }else{
+        count += 1;
+    }
+}

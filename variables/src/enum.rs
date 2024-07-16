@@ -15,7 +15,7 @@ impl Message {
         //method
     }
 }
-fun enum_main(){
+fn enum_main(){
     let home = IpAddr::V4(127,0,0,1);
     let loopBack = IpAddr::V6(String::from("::1"));
     let m = Message::Write(String::from("hello"));
