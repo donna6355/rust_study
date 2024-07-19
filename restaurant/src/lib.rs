@@ -32,9 +32,14 @@ mod front_of_house{
     }
 }
 
+// use crate::front_of_house::hosting;
+//use only creates the shortcut for the particular scope in which the use occurs
+pub use crate::front_of_house::hosting;
+
 pub fn eat_at_restaurant(){
     //absolute path starting crate keyword
-    crate::front_of_house::hosting::add_to_waitlist();
+    // crate::front_of_house::hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
 
     //relative path starting with a module name
     //the name of the module defined at the same level
@@ -84,3 +89,36 @@ pub fn eat_at_summer_restaurant({
     let order1 = back_of_office::Appetizer::Soup;
     let order2 = back_of_office::Appetizer::Salad;
 })
+//Rust wouldn’t know which one we meant when we used Result
+// use std::fmt::Result;
+// use std::io::Result;
+
+//better to show parent module
+use std::fmt;
+use std::io;
+
+//provide new name with as
+use std::fmt::Result;
+use std::io::Result as IoResult;
+
+fn function1() -> fmt::Result {
+    // --snip--
+}
+
+fn function2() -> io::Result<()> {
+    // --snip--
+}
+
+fn function3()->Result{}
+fn function4()->IoResult<()>{}
+
+//nested path
+// use std::cmp::Ordering;
+// use std::io;
+use std::{cmp::Ordering, io};
+// use std::io;
+// use std::io::Write;
+use std::io::{self, Write};
+
+//glob operator bring all public items defined in a path into scope
+user std::collections::*;
