@@ -13,24 +13,26 @@ mod tests {
     }
 }
 
+mod front_of_house;
+
 
 //cargo new restaurant --lib; create new library
-mod front_of_house{
-    //Items in a parent module can’t use the private items inside child modules, but items in child modules can use the items in their ancestor modules
-    pub mod hosting {
-        pub fn add_to_waitlist() {}
+// mod front_of_house{
+//     //Items in a parent module can’t use the private items inside child modules, but items in child modules can use the items in their ancestor modules
+//     pub mod hosting {
+//         pub fn add_to_waitlist() {}
 
-        fn seat_at_table() {}
-    }
+//         fn seat_at_table() {}
+//     }
 
-    mod serving {
-        fn take_order() {}
+//     mod serving {
+//         fn take_order() {}
 
-        fn serve_order() {}
+//         fn serve_order() {}
 
-        fn take_payment() {}
-    }
-}
+//         fn take_payment() {}
+//     }
+// }
 
 // use crate::front_of_house::hosting;
 //use only creates the shortcut for the particular scope in which the use occurs
