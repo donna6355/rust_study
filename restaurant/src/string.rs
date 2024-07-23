@@ -21,4 +21,16 @@ fn string(){
     let st3 = String::from("toe");
 
     let st_all = format!("{st1}-{st2}-{st3}");
+
+
+
+    let hello = String::from("Здравствуйте"); // it takes 24 bytes!! 2 bytes per a single character
+    //this is the reason Rust not support string slice, indexing
+    // let h = st[0];//ERRPR!! Rust strings don’t support indexing
+    let h = &st[0..4]; // contains first 4 bytes of the string still can crash program
+
+    //this is the best way
+    for c in "Зд".chars() {
+        println!("{c}"); //З, д
+    }
 }
