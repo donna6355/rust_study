@@ -33,7 +33,7 @@ fn recoverable_error () {
     }
 
     //expect is more chosen in production-quality code
-    let hello_file = File::open("hello.txt").upwrap(); // for Ok return the value, for Err call the panic!
+    let hello_file = File::open("hello.txt").unwrap(); // for Ok return the value, for Err call the panic!
     let hello_file = File::open("hello.txt").expect("hello.txt should be included in this project"); // include error message with expect
 }
 
@@ -49,4 +49,38 @@ fn alternative() {
             panic!("Problem opening the file: {other_error:?}");
         }
     });
+}
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let username_file_result = File::open("hello.txt");
+    
+    let mut username_file = match username_file_result {
+        Ok(file) => file,
+        Err(e) => return Err(e),
+    }
+    
+    let mut username = String::new();
+    
+    match username_file.read_to_string(&mut username) {
+        Ok(_) => Ok(username),
+        Err(e) => Err(e),
+    }
+}
+fn shorter_read_username_from_file() -> Result<String, io::Error> {
+    let mut username_file = File::open("hello.txt")?; //to perform an early return of a value out of the function
+    let mut username = String::new();
+    username_file.read_to_string(&mut username)?;
+    Ok(username)
+
+}
+fn even_shorter_read_username_from_file() -> Result<String, io::Error> {
+    let mut username = String::new();
+    File::open("hello.txt")?.read_to_string(&mut username)?;
+    Ok(username)
+}
+
+use std::fs;
+use std::io;
+fn shortest_read_username_from_file() -> Result<String, io::Error> {
+    fs::read_to_string("hello.txt")
 }
