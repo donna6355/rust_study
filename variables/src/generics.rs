@@ -50,3 +50,46 @@ fn main(){
     println!("The largest char is {result}");
 
 }
+
+//In Struct Definition
+struct Point <T, U>{
+    x:T,
+    y:U,
+}
+
+fn point_main() {
+    let both_integer = Point { x: 5, y: 10 };
+    let both_float = Point { x: 1.0, y: 4.0 };
+    let integer_and_float = Point { x: 5, y: 4.0 };
+}
+
+//In Enum Definition
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+//In Method Definitions
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Point<T> {
+    fn x(&self) -> &T {
+        &self.x
+    }
+}
+
+//specify constraints on generic types. this method is only for f32!!
+impl Point<f32> {
+    fn distance_from_origin(&self) -> f32 {
+        (self.x.powi(2) + self.y.powi(2)).sqrt()
+    }
+}
+
+fn main() {
+    let p = Point { x: 5, y: 10 };
+
+    println!("p.x = {}", p.x());
+}
