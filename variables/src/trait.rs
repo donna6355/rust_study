@@ -57,3 +57,40 @@ pub fn notify(item: &impl Summary) {
 pub fn notify<T:Summary> (itme: &T){
     println!("Breaking news! {}", item.summarize());
 }
+
+pub fn notify(item1: &impl Summary, item2: &impl Summary) {} // can have diff arg
+pub fn notify<T:Summary> (item1:&T, item2: &T) {}// must have same type for arg
+
+fn returns_summarizable() -> impl Summary { //returns some type that implements the Summary trait without naming the concrete type
+    Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from(
+            "of course, as you probably already know, people",
+        ),
+        reply: false,
+        retweet: false,
+    }
+}
+
+use std::fmt::Display;
+//Using Trait Bounds to Conditionally Implement Methods
+struct Pair<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Pair<T> {
+    fn new(x: T, y: T) -> Self {
+        Self { x, y }
+    }
+}
+
+impl<T: Display + PartialOrd> Pair<T> {
+    fn cmp_display(&self) {
+        if self.x >= self.y {
+            println!("The largest member is x = {}", self.x);
+        } else {
+            println!("The largest member is y = {}", self.y);
+        }
+    }
+}
