@@ -3,3 +3,6 @@
 fn main() {
     call_me(); // Don't change this line
 }
+fn call_me() {
+    println!("Time to leave office and jump into Isaac's furry belly!!");
+}
